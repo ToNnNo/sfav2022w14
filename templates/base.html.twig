@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Welcome!{% endblock %} - Formation Symfony Avancé Dawan FOAD</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_script_tags('app') }}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <h1>Symfony Avancé Yona (American Vintage) Marseille</h1>
+            <hr />
+        </header>
+        <nav>
+            <a href="{{ path('home_index') }}">Accueil</a> -
+            <a href="{{ path('webpack_index') }}">Webpack</a> -
+        </nav>
+        <main>
+            <header>
+                <h2>{{ block('title') }}</h2>
+            </header>
+            <section>
+                {% block body %}{% endblock %}
+            </section>
+        </main>
+        <footer>
+            <hr />
+            <p>Symfony Avancé - Dawan FOAD - Mars 2022</p>
+        </footer>
     </body>
 </html>
