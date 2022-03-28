@@ -2,6 +2,40 @@
 
 {% block title %}Webpack{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('webpack') }}
+{% endblock %}
+
 {% block body %}
+
+    <div>
+        <h3>Ajouter loader sass</h3>
+        <p>
+            <code>yarn add sass-loader@^12.0.0 sass --dev</code>
+        </p>
+    </div>
+
+    <div>
+        <h3>Stimulus</h3>
+        <p {{ stimulus_controller('hello') }}></p>
+
+        <div {{ stimulus_controller('say-hello') }}>
+            <input type="text" {{ stimulus_target('say-hello', 'name') }} aria-label="name" placeholder="Entrer votre nom" />
+
+            <button {{ stimulus_action('say-hello', 'greet') }}>
+                Greet
+            </button>
+
+            <div {{ stimulus_target('say-hello', 'output') }}></div>
+        </div>
+
+    </div>
+
+    <div>
+        <h3>Symfony UX</h3>
+        <a href="https://www.chartjs.org/docs/3.7.0/samples/scale-options/grid.html">Grid Configuration (options)</a>
+
+        {{ render_chart(chart) }}
+    </div>
 
 {% endblock %}

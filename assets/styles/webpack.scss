@@ -1,0 +1,17 @@
+$black: #333;
+$white: #fff;
+$yellow: #eeea0f;
+
+body {
+    background-color: $black;
+    color: $white;
+}
+
+a {
+    color: $yellow;
+
+    &:hover {
+        color: darken($yellow, 15%);
+    }
+}
+
