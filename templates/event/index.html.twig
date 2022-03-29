@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Evènements Symfony{% endblock %}
+
+{% block body %}
+
+    <p>
+        Avec un subscriber, rediriger la route "/no-way" vers l'accueil: <a href="/no-way">Exercice</a>
+    </p>
+
+    <p>Evenement défini dans le Kernel</p>
+
+    <ul>
+        <li>Request: après la requête</li>
+        <li>Controller: avant resolution du nom du controller</li>
+        <li>Argument: avant resolution des arguments</li>
+        <li>View: avant resolution de la réponse</li>
+        <li>Response: avant le retour de la réponse</li>
+        <li>Finish: après le retour de la réponse</li>
+        <li>Terminate: après l'envoi de la réponse</li>
+        <li>Exception: avant de capter une exception</li>
+    </ul>
+
+    <h3>Listener</h3>
+
+    {# {{ dump(app.request.attributes) }} affiche dans la page #}
+
+    {# {% dump('Hello World') %}  affiche dans la debug tool bar #}
+
+    <p>
+        Afficher la liste listener/subscriber attachés à un évènement (kernel.request)<br />
+        <code>bin/console debug:event-dispatcher kernel.request</code>
+    </p>
+
+    <p>Vous avez {{ app.request.attributes.get('_custom_value', 0) }} nouveaux messages</p>
+
+    <h3>Subscriber</h3>
+
+    <p>Subscriber Called</p>
+    <ul>
+        {% for _method in app.request.attributes.get('_custom_methods_called') %}
+            <li>{{ _method }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
