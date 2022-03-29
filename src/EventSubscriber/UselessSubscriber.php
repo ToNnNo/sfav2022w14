@@ -27,7 +27,7 @@ class UselessSubscriber implements EventSubscriberInterface
         $event->getRequest()->attributes->set('_custom_methods_called', $methods);
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             'kernel.request' => [
