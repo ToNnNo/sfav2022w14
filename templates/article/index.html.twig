@@ -23,7 +23,9 @@
                 <td>{{ post.id }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.content | striptags | u.truncate(75, '...', false) }}</td>
-                <td></td>
+                <td>
+                    <a href="{{ path('article_detail', {'id': post.id}) }}" class="btn btn-outline-dark btn-sm">Détail</a>
+                </td>
             </tr>
         {% else %}
             <tr>

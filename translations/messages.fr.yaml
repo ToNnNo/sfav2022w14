@@ -1,6 +1,4 @@
-label:
-    title: Titre
-    content: Contenu
-placeholder:
-    title: Entrer le titre de votre article
-    content: ...
+label.title: Titre
+label.content: Contenu
+placeholder.title: 'Entrer le titre de votre article'
+placeholder.content: ...

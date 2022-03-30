@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\HandlerArticle;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,16 @@ class ArticleController extends AbstractController
 
         return $this->render('article/index.html.twig', [
             'posts' => $posts
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="detail", requirements={"id"="\d+"})
+     */
+    public function detail(Post $post): Response
+    {
+        return $this->render('article/detail.html.twig', [
+            'post' => $post
         ]);
     }
 
