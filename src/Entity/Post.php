@@ -29,6 +29,11 @@ class Post
      */
     private $content;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $tags = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +59,18 @@ class Post
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getTags(): ?array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?array $tags): self
+    {
+        $this->tags = $tags;
 
         return $this;
     }

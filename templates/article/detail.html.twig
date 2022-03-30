@@ -22,6 +22,10 @@
                 <th>Content</th>
                 <td>{{ post.content | raw }}</td>
             </tr>
+            <tr>
+                <th>tags</th>
+                <td>{{ post.tags | join(', ') }}</td>
+            </tr>
         </tbody>
     </table>
 

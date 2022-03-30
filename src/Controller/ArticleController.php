@@ -59,4 +59,24 @@ class ArticleController extends AbstractController
             'form' => $form
         ]);
     }
+
+    /**
+     * @Route("/edit/{id}", name="edit")
+     */
+    public function edit(Request $request, Post $post, HandlerArticle $handlerArticle): Response
+    {
+        $form = $this->createForm(PostType::class, $post);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $handlerArticle->edit();
+
+            // post traitement
+            return $this->redirectToRoute('article_edit', ['id' => $post->getId()]);
+        }
+
+        return $this->renderForm('article/edit.html.twig', [
+            'form' => $form
+        ]);
+    }
 }

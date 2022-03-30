@@ -14,6 +14,7 @@
             <th>ID</th>
             <th>Title</th>
             <th>Content</th>
+            <th>Tags</th>
             <th></th>
         </tr>
         </thead>
@@ -23,8 +24,12 @@
                 <td>{{ post.id }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.content | striptags | u.truncate(75, '...', false) }}</td>
+                <td>{{ post.tags | join(', ') }}</td>
                 <td>
-                    <a href="{{ path('article_detail', {'id': post.id}) }}" class="btn btn-outline-dark btn-sm">Détail</a>
+                    <div class="btn-group btn-group-sm">
+                        <a href="{{ path('article_detail', {'id': post.id}) }}" class="btn btn-outline-dark btn-sm">Détail</a>
+                        <a href="{{ path('article_edit', {'id': post.id}) }}" class="btn btn-outline-dark btn-sm">Modifier</a>
+                    </div>
                 </td>
             </tr>
         {% else %}

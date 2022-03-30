@@ -45,7 +45,7 @@ EOF;
             ->html(nl2br($message))
         ;
 
-        $this->mailer->send($email);
+        // $this->mailer->send($email);
 
         // dump("Un nouvel article a été ajouté : ".$event->getPost()->getTitle());
 

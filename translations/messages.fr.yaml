@@ -2,3 +2,9 @@ label.title: Titre
 label.content: Contenu
 placeholder.title: 'Entrer le titre de votre article'
 placeholder.content: ...
+label:
+    tags: Tags
+placeholder:
+    tags: Sélectionner un ou plusieurs tags
+help:
+    tags: 'Séparer vos tags par des virgules (exemple: tag 1, tag 2, tag 3)'

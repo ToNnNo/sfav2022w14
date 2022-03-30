@@ -26,4 +26,11 @@ class HandlerArticle
         $event = new HandlerArticleEvent($entity);
         $this->dispatcher->dispatch($event, HandlerArticleEvent::NAME);
     }
+
+    public function edit(): void
+    {
+        $this->em->flush();
+
+        // post traitement
+    }
 }
