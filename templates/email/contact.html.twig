@@ -1,0 +1,42 @@
+<html lang="fr">
+<body>
+{% apply inline_css(source('@email_css/style.css')) %}
+{# <style>
+    .body { font-family: -apple-system, arial, helvetica, sans-serif; background-color: #eee; width: 100%; padding: 100px 0 }
+    .container { background-color: #fff; padding: 10px; width: 75%; margin: auto; border-radius: 3px }
+</style> #}
+    {% dump(email) %}
+<div class="body">
+    <div class="container">
+        <header>
+            <h1>Demande d'information</h1>
+        </header>
+        <section>
+            {# <img src="cid:logo" alt="logo symfony" class="m-auto" /> #}
+            <img src="{{ email.image('@email_image/symfony-logo.png') }}" alt="logo symfony" class="m-auto" />
+        </section>
+        <section>
+            <p>Bonjour,</p>
+
+            <p>Vous avez reçu un nouveau message de la part de <b>{{ name }}</b> depuis Yona App.</p>
+
+            <p>
+                Message:<br/>
+                {{ message | nl2br }}
+            </p>
+
+            <p>
+                Vous pouvez y répondre à cette adresse: <a href="mailto:{{ mail }}">{{ mail }}</a>
+            </p>
+        </section>
+        <footer>
+            <hr/>
+            Formulaire de contact<br/>
+            Yona App - Dawan - Formation Symfony<br/>
+            Site Web - <a href="{{ url('home_index') }}">{{ url('home_index') }}</a>
+        </footer>
+    </div>
+</div>
+{% endapply %}
+</body>
+</html>
