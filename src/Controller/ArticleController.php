@@ -52,11 +52,6 @@ class ArticleController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            if(null != $post->getFile()) {
-                $name = $fileManager->setDirectory(Post::IMAGE_DIRECTORY)->uploadFile($post->getFile());
-                $post->setImage($name);
-            }
-
             $handlerArticle->add($post);
 
             // post traitement
@@ -73,19 +68,11 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Post $post, HandlerArticle $handlerArticle, FileManager $fileManager): Response
     {
-        if(null !== $post->getImage()) {
-            $post->setFile(new File(Post::IMAGE_DIRECTORY.$post->getImage()));
-        }
-
         $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            if(null != $post->getFile()) {
-                $name = $fileManager->setDirectory(Post::IMAGE_DIRECTORY)->uploadFile($post->getFile());
-                $post->setImage($name);
-            }
-            $handlerArticle->edit();
+            $handlerArticle->edit($post);
 
             // post traitement
             return $this->redirectToRoute('article_edit', ['id' => $post->getId()]);

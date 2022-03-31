@@ -12,6 +12,7 @@
         <thead>
         <tr>
             <th>ID</th>
+            <th>Image</th>
             <th>Title</th>
             <th>Content</th>
             <th>Tags</th>
@@ -22,6 +23,14 @@
         {% for post in posts %}
             <tr>
                 <td>{{ post.id }}</td>
+                <td>
+                    {% if post.image is not empty %}
+                        <img src="{{ asset(constant('App\\Entity\\Post::IMAGE_DIRECTORY') ~ post.image) }}"
+                             alt="Illustration pour l'article {{ post.title }}" width="80" />
+                    {% else %}
+                        <img src="" alt="No Image" width="80" />
+                    {% endif %}
+                </td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.content | striptags | u.truncate(75, '...', false) }}</td>
                 <td>{{ post.tags | join(', ') }}</td>

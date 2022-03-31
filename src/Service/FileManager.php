@@ -8,9 +8,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileManager
 {
-    private $directory;
     private $filesystem;
     private $publicDirectory;
+
+    private $directory;
+    private $existingImage = null;
 
     public function __construct(Filesystem $filesystem, string $publicDirectory)
     {
@@ -30,6 +32,10 @@ class FileManager
             $this->filesystem->mkdir($absolutePathDirectory);
         }
 
+        if( $this->hasExistingImage() ) {
+            $this->removeExistingImage();
+        }
+
         $date = new \DateTime();
         $datetimestring = $date->format('YmdHis');
         $name = $datetimestring . $file->getClientOriginalName();
@@ -46,4 +52,27 @@ class FileManager
         return $this;
     }
 
+    public function setExistingImage(?string $image): self
+    {
+        if(null !== $image) {
+            $this->existingImage = $image;
+        }
+
+        return $this;
+    }
+
+    public function hasExistingImage(): bool
+    {
+        return $this->existingImage !== null;
+    }
+
+    public function removeExistingImage(): self
+    {
+        $image = $this->publicDirectory. DIRECTORY_SEPARATOR . $this->directory . $this->existingImage;
+        if($this->filesystem->exists($image)) {
+            $this->filesystem->remove($image);
+        }
+
+        return $this;
+    }
 }
