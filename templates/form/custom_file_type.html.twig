@@ -1,0 +1,32 @@
+
+
+{% block custom_file_widget %}
+    {% set classes = attr.class|default('') %}
+    {% set attr = attr|merge({style:"display:none"}) %}
+
+    {{- block('form_widget_simple') -}}
+    <div class="input-group">
+        <input type="text" class="{{ classes }} form-control" placeholder="{{ attr.placeholder | trans }}" id="textfield_{{ id }}" readonly
+               {% if data is not empty -%} value="{{ data.filename }}" {%- endif %} />
+        <button type="button" class="btn btn-outline-secondary" id="file_browse_{{ id }}">Parcourir</button>
+        {% if data is not empty and show_image %}
+            <a href="{{ asset(directory ~ data.filename) }}" class="btn btn-outline-secondary" target="_blank">Voir l'image</a>
+        {% endif %}
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const targets = document.querySelectorAll("#file_browse_{{ id }}, #textfield_{{ id }}");
+
+            for(let target of targets) {
+              target.addEventListener('click', function() {
+                let input = document.querySelector('#{{ id }}');
+                input.click();
+                input.addEventListener('change', function() {
+                  document.querySelector("#textfield_{{ id }}").value = input.value.replace('C:\\fakepath\\', '');
+                })
+              });
+            }
+        });
+    </script>
+
+{% endblock %}

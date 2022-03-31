@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Post;
+use App\Form\Custom\CustomFileType;
 use App\Form\Transformer\StringToArrayModelTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -40,6 +41,15 @@ class PostType extends AbstractType
                     'placeholder' => 'placeholder.tags'
                 ],
                 'help' => 'help.tags'
+            ])
+            ->add('file', CustomFileType::class, [
+                'label' => 'label.image',
+                'attr' => [
+                    'placeholder' => 'placeholder.image'
+                ],
+                'help' => 'help.image',
+                'directory' => Post::IMAGE_DIRECTORY,
+                // 'show_image' => false
             ])
         ;
 

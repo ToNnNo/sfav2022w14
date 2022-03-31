@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Form\Transformer\StringToArrayModelTransformer;
 use App\Repository\PostRepository;
+use App\Service\FileManager;
 use App\Service\HandlerArticle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,13 +45,18 @@ class ArticleController extends AbstractController
     /**
      * @Route("/add", name="add")
      */
-    public function add(Request $request, HandlerArticle $handlerArticle): Response
+    public function add(Request $request, HandlerArticle $handlerArticle, FileManager $fileManager): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            if(null != $post->getFile()) {
+                $name = $fileManager->setDirectory(Post::IMAGE_DIRECTORY)->uploadFile($post->getFile());
+                $post->setImage($name);
+            }
+
             $handlerArticle->add($post);
 
             // post traitement
@@ -63,12 +71,20 @@ class ArticleController extends AbstractController
     /**
      * @Route("/edit/{id}", name="edit")
      */
-    public function edit(Request $request, Post $post, HandlerArticle $handlerArticle): Response
+    public function edit(Request $request, Post $post, HandlerArticle $handlerArticle, FileManager $fileManager): Response
     {
+        if(null !== $post->getImage()) {
+            $post->setFile(new File(Post::IMAGE_DIRECTORY.$post->getImage()));
+        }
+
         $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            if(null != $post->getFile()) {
+                $name = $fileManager->setDirectory(Post::IMAGE_DIRECTORY)->uploadFile($post->getFile());
+                $post->setImage($name);
+            }
             $handlerArticle->edit();
 
             // post traitement

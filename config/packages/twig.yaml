@@ -2,6 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes:
         - 'bootstrap_5_layout.html.twig'
+        - 'form/custom_file_type.html.twig'
     paths:
         '%kernel.project_dir%/public/email/css': email_css
         '%kernel.project_dir%/public/email/images': email_image

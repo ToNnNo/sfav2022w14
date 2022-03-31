@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -11,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Post
 {
+    public const IMAGE_DIRECTORY = 'images/post/';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -33,6 +37,16 @@ class Post
      * @ORM\Column(type="array", nullable=true)
      */
     private $tags = [];
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var UploadedFile $file
+     */
+    private $file;
 
     public function getId(): ?int
     {
@@ -74,4 +88,29 @@ class Post
 
         return $this;
     }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
 }

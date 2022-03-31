@@ -1,10 +1,13 @@
-label.title: Titre
-label.content: Contenu
-placeholder.title: 'Entrer le titre de votre article'
-placeholder.content: ...
 label:
+    title: Titre
+    content: Contenu
     tags: Tags
+    image: Image
 placeholder:
+    title: 'Entrer le titre de votre article'
+    content: ...
     tags: Sélectionner un ou plusieurs tags
+    image: Choississez une image
 help:
     tags: 'Séparer vos tags par des virgules (exemple: tag 1, tag 2, tag 3)'
+    image: 'Extensions autorisées (jpg, png)'
