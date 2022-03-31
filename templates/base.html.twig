@@ -33,6 +33,11 @@
 
         <span>Bonjour {{ app.request.attributes.get('_custom_gender') }} {{ app.request.attributes.get('_custom_username', 'inconnu') }}</span>
     </nav>
+    <section>
+        <p class="lead">
+            <span class="text-info">Météo :</span> le {{ date('1648710000') | format_date }} vers {{ date('1648710000') | format_time }} dans le nord, il devait <i class="bi bi-cloud-snow"></i>
+        </p>
+    </section>
     <main>
         <header>
             <h2>{{ block('title') }}</h2>
