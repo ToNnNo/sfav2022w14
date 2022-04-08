@@ -8,10 +8,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class StringToArrayModelTransformer implements DataTransformerInterface
 {
 
-    /**
-     * @inheritDoc
-     */
-    public function transform($arrayToString)
+    public function transform($arrayToString): string
     {
         if(empty($arrayToString)) {
             $arrayToString = [];
@@ -20,10 +17,7 @@ class StringToArrayModelTransformer implements DataTransformerInterface
         return implode(', ', $arrayToString);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function reverseTransform($stringToArray)
+    public function reverseTransform($stringToArray): array
     {
         return array_map('trim', explode(',', $stringToArray));
     }

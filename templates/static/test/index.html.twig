@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Tests{% endblock %}
+
+{% block body %}
+
+    <h2>Test Unitaire</h2>
+    <p><code>composer require --dev symfony/phpunit-bridge</code></p>
+    <p><code>bin/console make:test</code></p>
+    <p>executer le test unitaire <code>bin/phpunit</code></p>
+    <p>Au premier lancement laisser la bibliothèque s'installer</p>
+
+    <p>Les methodes à tester doivent commencer par le mot clé test. Ex: <code>testSomething()</code></p>
+
+    <p>Bonne pratique pour l'écriture des tests unitaires: <b>FIRST</b></p>
+    <dl class="row">
+        <dt class="col-1"><b>F</b>ast:</dt>
+        <dd class="col-11">Rapides, quelques milli-secondes maximum</dd>
+
+        <dt class="col-1"><b>I</b>solated:</dt>
+        <dd class="col-11"> Isolés, aucun test ne dépend d’un autre, pour qu’une collection de tests puisse être jouée
+            dans n’importe quel ordre
+        </dd>
+
+        <dt class="col-1"><b>R</b>epeatable:</dt>
+        <dd class="col-11"> Répétables, joués N fois, produisent toujours le même résultat</dd>
+
+        <dt class="col-1"><b>S</b>elf-validating:</dt>
+        <dd class="col-11"> Auto-validés, chaque test doit être capable de déterminer si son résultat est celui attendu
+            ou non. Il doit déterminer s’il a réussi ou échoué. Il ne doit pas y avoir d’interprétation manuelle des
+            résultats
+        </dd>
+
+        <dt class="col-1"><b>T</b>imely:</dt>
+        <dd class="col-11"> Opportuns, ils doivent être écrits à peu près en même temps que le code qu’ils testent. Le
+            TDD les écrit même avant
+        </dd>
+    </dl>
+
+    <h3>Cycle de vie</h3>
+    <p>Les méthodes template <code>setUp()</code> et <code>tearDown()</code> sont exécutées une fois pour chaque méthode
+        de test.</p>
+
+    <p>Les méthodes template <code>setUpBeforeClass()</code> et <code>tearDownAfterClass()</code> sont appelées
+        respectivement avant que le premier test de la classe ne soit exécuté et après que le dernier
+        test de la classe de test a été exécuté.</p>
+
+    <h3>Provider</h3>
+    <p>Une méthode de test peut accepter des arguments arbitraires. Ces arguments doivent être fournis par une méthode
+        fournisseur de données <code>provider()</code>. La méthode du fournisseur de données à utiliser peut être
+        spécifiée à l'aide de l'annotation <code>@dataProvider</code></p>
+
+    <p>Une méthode de fournisseur de données doit être publique et renvoyer un <code>tableau de tableaux</code> ou un
+        <code>objet qui implémente l'interface Iterator</code> et génère un tableau pour chaque étape d'itération.
+        Pour chaque tableau faisant partie de la collection, la méthode de test sera appelée avec le contenu du tableau
+        comme arguments.</p>
+
+    <h3>Exception</h3>
+    <p>
+        Pour s'assurer qu'une fonctionne soulève un type d'exception, on peut utiliser la method
+        <code>expectException</code> en indiquant en paramètre le nom de l'exception qui est soulever
+        (Ex: <code>expectException(\Exception::class)</code>).
+    </p>
+
+    <h4>Les Mocks</h4>
+    <p><i>Ne pas dépendre d'un système externe dans le contexte des tests</i></p>
+    <p>Un mock est une doublure. C'est un objet créé à partir d'un type de classe dont vous maîtrisez
+        entièrement le comportement. Le but est d'effectuer tranquillement vos tests unitaires sur une méthode qui a
+        besoin de ce type de classe.</p>
+
+    <h5>Les Dummy</h5>
+    <p>Ce sont des objets sans comportement spécifiques qui remplace un objet existant</p>
+
+    <h5>Les Stub</h5>
+    <p>Ce sont des dummy auxquelles nous avons défini 1 ou plusieurs comportement</p>
+
+    <h3>Test Fonctionnel</h3>
+    <p><code>composer require --dev symfony/browser-kit symfony/css-selector</code></p>
+    <p><code>bin/console make:functional-test</code></p>
+
+    <h3>Dom Crawler</h3>
+    <p><a href="https://symfony.com/doc/current/testing/dom_crawler.html">Doc</a></p>
+
+    <p>
+        Liste des fonctions spécifiques pour les tests fonctionnels:
+        <a href="https://symfony.com/doc/current/testing/functional_tests_assertions.html" target="_blank">doc</a>
+    </p>
+
+    <ul>
+        <li>
+            <a href="https://symfony.com/doc/current/components/phpunit_bridge.html#time-sensitive-tests"
+               target="_blank">
+                Gestion des fonction de temps (time(); date(); etc): Clock Mock
+            </a>
+        </li>
+        <li>
+            <a href="https://symfony.com/doc/current/testing/database.html" target="_blank">
+                Unit test & Functional test: database
+            </a>
+        </li>
+        <li>
+            <a href="https://medium.com/@nicolas.poste/les-tests-oui-mais-pas-nimporte-comment-b9283dee9776"
+               target="_blank">
+                Source bonne pratique Test Unitaire
+            </a>
+        </li>
+        <li>
+            <a href="https://symfony.com/blog/new-in-symfony-4-1-simpler-service-testing" target="_blank">
+                Tester les services ?
+            </a>
+        </li>
+        <li>
+            <a href="https://phpunit.readthedocs.io/fr/latest/test-doubles.html" target="_blank">
+                Créer un mock
+            </a>
+        </li>
+    </ul>
+
+{% endblock %}

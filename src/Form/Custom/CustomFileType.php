@@ -29,7 +29,7 @@ class CustomFileType extends AbstractType
         $resolver->setDefaults([]);
     }
 
-    public function getParent()
+    public function getParent(): ?string
     {
         return FileType::class;
     }
