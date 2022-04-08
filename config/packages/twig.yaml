@@ -7,6 +7,10 @@ twig:
     paths:
         '%kernel.project_dir%/public/email/css': email_css
         '%kernel.project_dir%/public/email/images': email_image
+    globals:
+        agence:
+            name: Dawan Lille
+            address: 46 rue des canonniers 59800 Lille
 
 when@test:
     twig:

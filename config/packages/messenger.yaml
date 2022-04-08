@@ -1,5 +1,6 @@
 framework:
     messenger:
+        reset_on_message: true
         failure_transport: failed
 
         transports:
@@ -17,8 +18,10 @@ framework:
 
         routing:
             # Symfony\Component\Mailer\Messenger\SendEmailMessage: async
-            Symfony\Component\Notifier\Message\ChatMessage: async
-            Symfony\Component\Notifier\Message\SmsMessage: async
+            # Symfony\Component\Notifier\Message\ChatMessage: async
+            # Symfony\Component\Notifier\Message\SmsMessage: async
+            App\Message\SimpleHelloWorld: async
+            App\Message\Fail: failed
 
             # Route your messages to the transports
             # 'App\Message\YourMessage': async

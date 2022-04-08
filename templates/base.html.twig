@@ -30,6 +30,7 @@
         <a href="{{ path('event_index') }}">Les Evènements Symfony</a> -
         <a href="{{ path('article_index') }}">Liste des articles</a> -
         <a href="{{ path('contact_index') }}">Contacter nous</a> -
+        <a href="{{ path('messenger_index') }}">Messenger</a> -
 
         <span>Bonjour {{ app.request.attributes.get('_custom_gender') }} {{ app.request.attributes.get('_custom_username', 'inconnu') }}</span>
     </nav>
@@ -37,6 +38,15 @@
         <p class="lead">
             <span class="text-info">Météo :</span> le {{ date('1648710000') | format_date }} vers {{ date('1648710000') | format_time }} dans le nord, il devait <i class="bi bi-cloud-snow"></i>
         </p>
+    </section>
+    <section>
+        {% for level, messages in app.flashes %}
+            <div class="alert alert-{{ level }}" role="alert">
+            {% for message in messages %}
+                <strong>{{ level | humanize }}</strong>: {{ message }} <br />
+            {% endfor %}
+            </div>
+        {% endfor %}
     </section>
     <main>
         <header>
@@ -48,7 +58,10 @@
     </main>
     <footer>
         <hr/>
-        <p class="text-center small">Symfony Avancé - Dawan FOAD - Mars 2022</p>
+        <p class="text-center small">
+            Symfony Avancé - Dawan FOAD - Mars 2022<br />
+            {{ agence.name }} - {{ agence.address }}
+        </p>
     </footer>
 </div>
 </body>

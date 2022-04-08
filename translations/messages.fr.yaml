@@ -3,11 +3,14 @@ label:
     content: Contenu
     tags: Tags
     image: Image
+    name: Nom
+    send: Envoyer
 placeholder:
     title: 'Entrer le titre de votre article'
     content: ...
     tags: Sélectionner un ou plusieurs tags
     image: Choississez une image
+    name: Renseigner votre nom
 help:
     tags: 'Séparer vos tags par des virgules (exemple: tag 1, tag 2, tag 3)'
     image: 'Extensions autorisées (jpg, png)'
